@@ -1,4 +1,5 @@
 ﻿using BancoPan.Entity.Entity;
+using BancoPan.Entity.Entity.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,6 +9,6 @@ namespace BancoPan.Entity.Repositories.Interfaces
 {
     public interface IClienteRepository : IRepository<Cliente>
     {
-        Task<dynamic> getUser(string cpf);
+        Task<IEnumerable<Usuario>> getUser(string cpf);
     }
 }

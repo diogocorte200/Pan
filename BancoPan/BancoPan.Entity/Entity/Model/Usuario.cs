@@ -1,7 +1,12 @@
-﻿namespace BancoPan.Domain.Domain
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace BancoPan.Entity.Entity.Model
 {
-    public class ClienteModel : BaseDomain
+    public class Usuario
     {
+        public int Id { get; set; }
         public string Cpf { get; set; }
         public string Nome { get; set; }
         public string Logradouro { get; set; }

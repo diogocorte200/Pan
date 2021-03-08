@@ -34,26 +34,32 @@ namespace BancoPan.Domain.Services
 
             _enderecoRepository = enderecoRepository;
         }
-
-
-        public async Task<List<ClienteModel>> BuscarCliente(string cpf)
+        public async Task<IEnumerable<ClienteModel>> BuscarCliente(string cpf)
         {
             try
             {
-                var clientesAtivas = _clienteRepository.GetAll().Where(x => x.Cpf == cpf);
+                var result = await _clienteRepository.getUser(cpf);
 
                 List<ClienteModel> clientes = new List<ClienteModel>();
-                foreach (var elem in clientesAtivas)
+
+                foreach (var item in result)
                 {
                     var lista = new ClienteModel();
-                    lista.Id = elem.Id;
-                    lista.Nome = elem.Nome;
-                    lista.Cpf = elem.Cpf;
+                    lista.Id = item.Id;
+                    lista.Nome = item.Nome;
+                    lista.Cpf = item.Cpf;
+                    lista.Cidade = item.Cidade;
+                    lista.Cep = item.Cep;
+                    lista.Numero = item.Numero;
+                    lista.Pais = item.Pais;
+                    lista.Estado = item.Estado;
+                    lista.Complemento = item.Complemento;
+                    lista.Logradouro = item.Logradouro;
 
                     clientes.Add(lista);
                 }
-
                 return clientes.OrderBy(x => x.Nome).ToList();
+
             }
             catch (EntityException e)
             {
